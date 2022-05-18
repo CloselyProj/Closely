@@ -1,0 +1,62 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<link rel="stylesheet" href="~/css/card.css" />
+<!-- SEARCH BOX -->
+    <form asp-page="/Room" method="post">
+        <label for="search">Search for stuff</label>
+        <input name="movie_link" id="search" type="search" placeholder="Search..." autofocus required />
+        <button class="search_btn" type="submit">Go</button>    
+      </form>
+
+
+<!-- CARDS -->
+<div class="cards">
+        <div class="card">
+    <div class="card__image-holder">
+      <img class="card__image" src="~/img/search.png" alt="wave" />
+    </div>
+    <div class="card-title">
+        <span class="left"></span>
+        <span class="right"></span>
+      <h2>
+          Search
+          <small>Paste the link into the input field</small>
+      </h2>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card__image-holder">
+      <img class="card__image" src="~/img/video.png" alt="wave" />
+    </div>
+    <div class="card-title">
+        <span class="left"></span>
+        <span class="right"></span>
+      </a>
+      <h2>
+          Room
+          <small>You will go to the created room</small>
+      </h2>
+    </div>
+  </div>
+
+
+  <div class="card">
+    <div class="card__image-holder">
+     <img class="card__image" src="~/img/link.png" alt="wave" />
+    </div>
+    <div class="card-title">
+        <span class="left"></span>
+        <span class="right"></span>
+      </a>
+      <h2>
+          Link
+          <small>Share the link with your friends</small>
+      </h2>
+    </div>
+  </div>
+  </div>

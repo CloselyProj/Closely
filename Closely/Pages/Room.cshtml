@@ -1,0 +1,18 @@
+﻿@page
+@model Closely.Pages.RoomModel
+@{
+    ViewData["Title"] = "Room";
+}
+<link rel="stylesheet" href="~/css/room.css" />
+
+<div id="app">
+    <div class="inner">
+        <!-- Player wrapper, forcing 16:9 aspect ratio -->
+        <div class="player-wrapper">
+            <div class="aspect-spacer"></div>
+            <div class="pos-absolute full-width full-height top-0">
+                <iframe id="video-player" class="el-player" src=@Model.Message playsinline allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+</div>
