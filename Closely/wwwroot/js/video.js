@@ -1,17 +1,39 @@
-﻿var video = document.getElementById("video-player");
-var bar = document.querySelector('.green-bar');
+﻿//var video = document.getElementById("video-player");
+//var bar = document.querySelector('.green-bar');
 var btn = document.getElementById("play-pause");
+btn.className = 'play';
 
-function togglePlayPause(){
+var player;
+
+function onYouTubePlayerAPIReady() {
+    player = new YT.Player('video-player', {
+        events: {
+            'onReady': onPlayerReady
+        }
+    });
+}
+
+function onPlayerReady(event) {
+
+    btn.onclick = function () {
+        togglePlayPause();
+    };
+}
+
+function togglePlayPause() {
     if (btn.className == 'play') {
         btn.className = 'pause';
-        video.src += "&autoplay=1";
+        player.playVideo();
     }
     else {
         btn.className = 'play';
+        player.pauseVideo();
     }
 }
-btn.onclick = function () {
-    btn.className = 'play';
-    togglePlayPause();
-};
+
+
+// Inject YouTube API script
+var tag = document.createElement('script');
+tag.src = "https://www.youtube.com/player_api";
+var firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
