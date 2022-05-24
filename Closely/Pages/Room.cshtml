@@ -4,15 +4,28 @@
     ViewData["Title"] = "Room";
 }
 <link rel="stylesheet" href="~/css/room.css" />
+<link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css">
 
 <div id="app">
     <div class="inner">
         <!-- Player wrapper, forcing 16:9 aspect ratio -->
         <div class="player-wrapper">
             <div class="aspect-spacer"></div>
-            <div class="pos-absolute full-width full-height top-0">
-                <iframe id="video-player" class="el-player" src=@Model.Message playsinline allowfullscreen></iframe>
+            <div class="pos-absolute full-width full-height top-0 c-video">
+                <iframe id="video-player" class="el-player" src=@Model.Message playsinline allowfullscreen allow="autoplay"></iframe>
+
+                <div class="controls">
+              <div class="color-bar">
+                  <div class="green-bar"></div>
+              </div>
+              <div class="buttons">
+                  <button id="play-pause"></button>
+              </div>
+          </div>
+
             </div>
         </div>
     </div>
 </div>
+
+<script src="~/js/video.js"></script>

@@ -11,8 +11,9 @@
     <div class="page">
       <header tabindex="0">
         <a asp-page=""><button class="custom-btn btn-6"><span>Films</span></button></a>
-        <a asp-page="/Index"><button class="custom-btn btn-6 btn"><span>YouTube</span></button></a>
-        <a asp-page=""><button class="custom-btn btn-6 btn"><span>My Video</span></button></a>
+        <a class="btn" asp-page="/Index"><button class="custom-btn btn-6"><span>YouTube</span></button></a>
+        <a class="btn" asp-page=""><button class="custom-btn btn-6"><span>My Video</span></button></a>
+        <a class="profile" asp-page="/Login"><button class="custom-btn btn-6"><span>Login</span></button></a>
       </header>
     </div>
 
@@ -22,10 +23,9 @@
         </main>
     </div>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-
     @await RenderSectionAsync("Scripts", required: false)
+
+    <script src="~/js/signalr/dist/browser/signalr.min.js"></script>
+    
 </body>
 </html>

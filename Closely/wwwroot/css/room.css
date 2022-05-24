@@ -218,3 +218,61 @@ video {
         top: -25%;
     }
 }
+
+
+
+/* CONTROLS */
+
+.controls {
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    flex-wrap: wrap;
+    background: rgb(15, 15, 15, 0.7);
+    transform: translateY(100%) translateY(-5px);
+    transition: all 0.2s;
+}
+.c-video:hover .controls {
+    transform: translateY(0);
+}
+.buttons {
+    padding: 10px;
+}
+
+    .buttons button {
+        background: none;
+        border: 0;
+        outline: 0;
+        cursor: pointer;
+    }
+
+        .buttons button:before {
+            content: '\f144';
+            width: 30px;
+            height: 30px;
+            display: inline-block;
+            font-family: 'Font Awesome 5 free';
+            font-size: 28px;
+            color: #fff;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .buttons button.play::before {
+            content: '\f144';
+        }
+
+        .buttons button.pause::before {
+            content: '\f28b';
+        }
+.color-bar {
+    height: 10px;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #0f0f0f;
+}
+.green-bar {
+    height: 10px;
+    background-color: #01d449;
+}

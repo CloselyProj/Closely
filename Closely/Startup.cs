@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Closely.Hubs;
 
 namespace Closely
 {
@@ -24,6 +25,7 @@ namespace Closely
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
+             services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,6 +51,7 @@ namespace Closely
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapHub<User>("/user");
                 endpoints.MapRazorPages();
             });
         }

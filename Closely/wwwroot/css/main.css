@@ -10,7 +10,10 @@
     --btn-width: 6rem;
     --bez: cubic-bezier(0, 0, 0.43, 1.49);
 }
-
+.profile {
+    position: absolute;
+    margin-left: 80%;
+}
 body {
     background: var(--color-dark);
     min-height: 100vh;
@@ -26,7 +29,7 @@ html {
     box-sizing: inherit;
 }
 
-form {
+.search_form {
     margin-top: 10%;
     margin-left: 37.5%;
     position: relative;
@@ -35,7 +38,7 @@ form {
     border-radius: var(--rad);
 }
 
-input, .search_btn {
+#search, .search_btn {
     height: var(--height);
     font-family: var(--font-fam);
     border: 0;
@@ -43,7 +46,7 @@ input, .search_btn {
     font-size: 1.8rem;
 }
 
-    input[type="search"] {
+    #search[type="search"] {
         outline: 0;
         width: 100%;
         background: var(--color-light);
@@ -67,16 +70,16 @@ input, .search_btn {
     border-radius: 0 var(--rad) var(--rad) 0;
 }
 
-input:not(:placeholder-shown) {
+#search:not(:placeholder-shown) {
     border-radius: var(--rad) 0 0 var(--rad);
     width: calc(100% - var(--btn-width));
 }
 
-    input:not(:placeholder-shown) + button {
+    #search:not(:placeholder-shown) + button {
         display: block;
     }
 
-label {
+.search_label {
     position: absolute;
     clip: rect(1px, 1px, 1px, 1px);
     padding: 0;
@@ -162,10 +165,6 @@ html, body {
     border: none;
 }
 
-.btn {
-    margin-left: 2%;
-}
-
 .btn-6 span {
     position: relative;
     display: block;
@@ -238,5 +237,10 @@ html, body {
 
 .btn-6 span:hover:after {
     width: 100%;
+}
+
+.btn {
+    position: relative;
+    margin-left: 2%;
 }
 /*NAVBAR----END*/

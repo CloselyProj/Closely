@@ -11,6 +11,7 @@ namespace Closely.Pages
             if(movie_link.Contains("watch?v="))
             {
                 Message = movie_link.Replace("watch?v=", "embed/");
+                Message += "?controls=0";
             }
         }
     }
