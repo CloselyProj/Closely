@@ -229,7 +229,7 @@ video {
     bottom: 0;
     width: 100%;
     flex-wrap: wrap;
-    background: rgb(15, 15, 15, 0.7);
+    background: rgb(15, 15, 15, 0.5);
     transform: translateY(100%) translateY(-5px);
     transition: all 0.2s;
 }
@@ -265,12 +265,13 @@ video {
         .buttons button.pause::before {
             content: '\f28b';
         }
-.color-bar {
+#color-bar {
     height: 10px;
     top: 0;
     left: 0;
     width: 100%;
-    background: #0f0f0f;
+    background: rgb(15, 15, 15, 0.7);
+    cursor: pointer;
 }
 #green-bar {
     height: 10px;

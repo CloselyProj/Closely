@@ -1,5 +1,6 @@
 ﻿//var video = document.getElementById("video-player");
-var bar = document.getElementById('green-bar');
+var bar = document.getElementById('color-bar');
+var greenbar = document.getElementById('green-bar');
 var btn = document.getElementById("play-pause");
 btn.className = 'play';
 
@@ -18,10 +19,13 @@ function onPlayerReady(event) {
     btn.onclick = function () {
         togglePlayPause();
     };
-
+    bar.onclick = function () {
+        SeekBar();
+    }
     timeupdater = setInterval(updateTime, 100);
 }
 
+// Запуск и пауза
 function togglePlayPause() {
     if (btn.className == 'play') {
         btn.className = 'pause';
@@ -33,6 +37,7 @@ function togglePlayPause() {
     }
 }
 
+// Обновление прогресс бара
 function updateTime() {
     var videotime = player.getCurrentTime() / player.getDuration();
     var oldTime = videotime;
@@ -42,8 +47,23 @@ function updateTime() {
     else {
 
         videotime = player.getCurrentTime() / player.getDuration();
-        bar.style.width = videotime * 100 + "%";
+        greenbar.style.width = videotime * 100 + "%";
     }
+}
+
+// Перемотка видео
+function SeekBar() {
+    const { left } = event.target.getBoundingClientRect();
+    //  const hint = this.player.querySelector('.j-hint');
+    // const ghost = this.player.querySelector('.j-line-ghost');
+
+    // hint.innerHTML = this.formatTime(this.calcNeededLine(event, left));
+    // hint.style.left = `${event.clientX - (left + (hint.offsetWidth / 2))}px`;
+    greenbar.style.width = `${event.clientX - left}px`;
+
+    const needPercent = ((event.clientX - left) / event.target.offsetWidth);
+    alert(needPercent);
+    player.seekTo(player.getDuration() * needPercent, true);
 }
 
 // Inject YouTube API script
