@@ -53,16 +53,9 @@ function updateTime() {
 
 // Перемотка видео
 function SeekBar() {
-    const { left } = event.target.getBoundingClientRect();
-    //  const hint = this.player.querySelector('.j-hint');
-    // const ghost = this.player.querySelector('.j-line-ghost');
-
-    // hint.innerHTML = this.formatTime(this.calcNeededLine(event, left));
-    // hint.style.left = `${event.clientX - (left + (hint.offsetWidth / 2))}px`;
+    let { left } = event.target.getBoundingClientRect();
     greenbar.style.width = `${event.clientX - left}px`;
-
-    const needPercent = ((event.clientX - left) / event.target.offsetWidth);
-    alert(needPercent);
+    let needPercent = ((event.clientX - left) / 1000);
     player.seekTo(player.getDuration() * needPercent, true);
 }
 
