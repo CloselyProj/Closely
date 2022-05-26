@@ -272,7 +272,7 @@ video {
     width: 100%;
     background: #0f0f0f;
 }
-.green-bar {
+#green-bar {
     height: 10px;
     background-color: #01d449;
 }

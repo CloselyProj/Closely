@@ -1,5 +1,5 @@
 ﻿//var video = document.getElementById("video-player");
-//var bar = document.querySelector('.green-bar');
+var bar = document.getElementById('green-bar');
 var btn = document.getElementById("play-pause");
 btn.className = 'play';
 
@@ -18,6 +18,8 @@ function onPlayerReady(event) {
     btn.onclick = function () {
         togglePlayPause();
     };
+
+    timeupdater = setInterval(updateTime, 100);
 }
 
 function togglePlayPause() {
@@ -31,6 +33,18 @@ function togglePlayPause() {
     }
 }
 
+function updateTime() {
+    var videotime = player.getCurrentTime() / player.getDuration();
+    var oldTime = videotime;
+    if (videotime !== oldTime) {
+        onProgress(videotime);
+    }
+    else {
+
+        videotime = player.getCurrentTime() / player.getDuration();
+        bar.style.width = videotime * 100 + "%";
+    }
+}
 
 // Inject YouTube API script
 var tag = document.createElement('script');
