@@ -277,3 +277,20 @@ video {
     height: 10px;
     background-color: #01d449;
 }
+#video-time {
+    padding: 10px;
+    color: white;
+    font-size: 20px;
+    text-align: center;
+}
+#hover-time {
+    display: none;
+    pointer-events: none;
+    position: absolute;
+    bottom: calc(100% + 10px);
+    padding: 3px 6px;
+    border-radius: 5px;
+    background-color: rgb(15, 15, 15, 0.5);
+    color: white;
+    font-size: 15px;
+}

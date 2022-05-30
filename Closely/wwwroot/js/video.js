@@ -2,9 +2,12 @@
 var bar = document.getElementById('color-bar');
 var greenbar = document.getElementById('green-bar');
 var btn = document.getElementById("play-pause");
+var time = document.getElementById("video-time");
+var hovertime = document.getElementById("hover-time");
 btn.className = 'play';
 
 var player;
+var ismouseover = false;
 
 function onYouTubePlayerAPIReady() {
     player = new YT.Player('video-player', {
@@ -23,6 +26,13 @@ function onPlayerReady(event) {
         SeekBar();
     }
     timeupdater = setInterval(updateTime, 100);
+    bar.addEventListener('mousemove', function () {
+        hovertime.style.display = 'block';
+        HoverTime();
+    });
+    bar.addEventListener('mouseleave', function () {
+        hovertime.style.display = 'none';
+    });
 }
 
 // Запуск и пауза
@@ -49,14 +59,46 @@ function updateTime() {
         videotime = player.getCurrentTime() / player.getDuration();
         greenbar.style.width = videotime * 100 + "%";
     }
+    SetVideoTime();
+
 }
 
 // Перемотка видео
 function SeekBar() {
     let { left } = event.target.getBoundingClientRect();
-    greenbar.style.width = `${event.clientX - left}px`;
+
     let needPercent = ((event.clientX - left) / 1000);
     player.seekTo(player.getDuration() * needPercent, true);
+
+    if (btn.className == 'play')
+        player.pauseVideo();
+}
+
+//Вывод времени видео
+function SetVideoTime() {
+    let current = GetVideoTime(player.getCurrentTime());
+    let duration = GetVideoTime(player.getDuration());
+    time.innerHTML = `${current}/${duration}`;
+}
+//Получение текущего времени видео
+function GetVideoTime(time) {
+    return `${Math.floor(time / 60)}:${FormatTime(Math.floor(time % 60))}`;
+}
+
+//Нужен ли ноль перед числом
+function FormatTime(num) {
+    return num < 10 ? `0${num}` : `${num}`;
+}
+
+//Вывод времени при наведении на прогресс бар
+function HoverTime() {
+    let { left }  = event.target.getBoundingClientRect();
+
+    let needPercent = ((event.clientX - left) / 1000);
+    let duration = player.getDuration() * needPercent;
+    hovertime.innerHTML = `${GetVideoTime(duration)}`;
+
+    hovertime.style.left = `${event.clientX - (left + (hovertime.offsetWidth / 2))}px`;
 }
 
 // Inject YouTube API script
