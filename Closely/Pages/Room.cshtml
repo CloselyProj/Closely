@@ -8,10 +8,19 @@
 
 @if (@Model.Message != "Incorrect link!")
 {
+    <div class="RoomChat">
+                <div class="UsersInRoom">
+                    
+                </div>
+                    <input class="TextBoxRead" id="textForm" type="text" readonly>
+                    <input class="TextBoxEnter" id="messageInput" type="text">
+                     <input type="button" id="sendButton" value="Send Message" />
+            </div>
+
     <div id="app">
         <div class="inner">
-            <!-- Player wrapper, forcing 16:9 aspect ratio ->
-        <div class="player-wrapper">
+            <!-- Player wrapper, forcing 16:9 aspect ratio -->
+        <div class="player-wrapper">    
                 <div class="aspect-spacer"></div>
                 <div class="pos-absolute full-width full-height top-0 c-video">
                     <iframe id="video-player" class="el-player" src=@Model.Message playsinline allowfullscreen allow="autoplay"></iframe>
@@ -33,7 +42,10 @@
         </div>
     </div>
 
+<script src="~/js/signalr/dist/browser/signalr.js"></script>
 <script src="~/js/video.js"></script>
+<script src="~/js/chat.js"></script>
+
 }
 else
 {

@@ -25,7 +25,7 @@ namespace Closely
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
-             services.AddSignalR();
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
