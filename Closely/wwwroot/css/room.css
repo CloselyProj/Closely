@@ -233,38 +233,31 @@ video {
     transform: translateY(100%) translateY(-5px);
     transition: all 0.2s;
 }
+
 .c-video:hover .controls {
     transform: translateY(0);
 }
+
 .buttons {
     padding: 10px;
+    width: 100%;
 }
 
-    .buttons button {
+    .buttons ion-icon {
         background: none;
         border: 0;
         outline: 0;
         cursor: pointer;
     }
+    .buttons ion-icon{
+        width: 35px;
+        height: 35px;
+        display: inline-block;
+        font-size: 28px;
+        color: #fff;
+        -webkit-font-smoothing: antialiased;
+    }
 
-        .buttons button:before {
-            content: '\f144';
-            width: 30px;
-            height: 30px;
-            display: inline-block;
-            font-family: 'Font Awesome 5 free';
-            font-size: 28px;
-            color: #fff;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        .buttons button.play::before {
-            content: '\f144';
-        }
-
-        .buttons button.pause::before {
-            content: '\f28b';
-        }
 #color-bar {
     height: 10px;
     top: 0;
@@ -273,16 +266,19 @@ video {
     background: rgb(15, 15, 15, 0.7);
     cursor: pointer;
 }
+
 #green-bar {
     height: 10px;
     background-color: #01d449;
 }
+
 #video-time {
-    padding: 10px;
     color: white;
     font-size: 20px;
-    text-align: center;
+    display: inline-block;
+    -webkit-font-smoothing: antialiased;
 }
+
 #hover-time {
     display: none;
     pointer-events: none;
@@ -295,9 +291,12 @@ video {
     font-size: 15px;
 }
 
+#expand{
+    float: right;
+}
+
+
 /*SEARCH BOX START*/
-
-
 #search, .search_btn {
     height: var(--height);
     font-family: var(--font-fam);
@@ -351,17 +350,18 @@ video {
 /*SEARCH BOX END*/
 
 /*ROOM_CHAT*/
-.RoomChat{
-    width:15%;
-    height:auto;
-    float:left;
+.RoomChat {
+    width: 15%;
+    height: auto;
+    float: left;
+}
 
+.TextBoxRead {
+    width: 200px;
+    height: 450px;
 }
-.TextBoxRead{
-    width:200px;
-    height:450px;
-}
-.TextBoxEnter{
-    width:200px;
-    height:50px;
+
+.TextBoxEnter {
+    width: 200px;
+    height: 50px;
 }

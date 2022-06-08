@@ -9,20 +9,19 @@
 @if (@Model.Message != "Incorrect link!")
 {
     <div class="RoomChat">
-                <div class="UsersInRoom">
-                    
-                </div>
-                    <input class="TextBoxRead" id="textForm" type="text" readonly>
-                    <input class="TextBoxEnter" id="messageInput" type="text">
-                     <input type="button" id="sendButton" value="Send Message" />
-            </div>
+        <div class="UsersInRoom">
+        </div>
+        <input class="TextBoxRead" id="textForm" type="text" readonly>
+        <input class="TextBoxEnter" id="messageInput" type="text">
+        <input type="button" id="sendButton" value="Send Message" />
+    </div>
 
     <div id="app">
         <div class="inner">
             <!-- Player wrapper, forcing 16:9 aspect ratio -->
-        <div class="player-wrapper">    
+        <div class="player-wrapper">
                 <div class="aspect-spacer"></div>
-                <div class="pos-absolute full-width full-height top-0 c-video">
+                <div id="c-video" class="pos-absolute full-width full-height top-0 c-video">
                     <iframe id="video-player" class="el-player" src=@Model.Message playsinline allowfullscreen allow="autoplay"></iframe>
 
                     <div class="controls">
@@ -30,22 +29,28 @@
                             <div id="green-bar"></div>
                         </div>
                         <div class="buttons">
-                            <button id="play-pause"></button>
+                            <ion-icon id="pause-play" name="play-circle-outline"></ion-icon>
+                            <ion-icon id="volume" name="volume-medium-outline"></ion-icon>
+                            <input type="range" id="volume-range">
+                            
+                            <div id="video-time"></div>
+
+                            <ion-icon id="expand" name="expand-outline"></ion-icon>
                         </div>
-
-                        <div id="video-time"></div>
-                        <div id="hover-time"></div>
-
+                            <div id="hover-time"></div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-<script src="~/js/signalr/dist/browser/signalr.js"></script>
-<script src="~/js/video.js"></script>
-<script src="~/js/chat.js"></script>
+    <script src="~/js/signalr/dist/browser/signalr.js"></script>
+    <script src="~/js/video.js"></script>
+    <script src="~/js/chat.js"></script>
 
+
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 }
 else
 {

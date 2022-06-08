@@ -1,10 +1,11 @@
-﻿//var video = document.getElementById("video-player");
-var bar = document.getElementById('color-bar');
+﻿var bar = document.getElementById('color-bar');
 var greenbar = document.getElementById('green-bar');
-var btn = document.getElementById("play-pause");
+var btn = document.getElementById("pause-play");
 var time = document.getElementById("video-time");
 var hovertime = document.getElementById("hover-time");
-btn.className = 'play';
+var range = document.getElementById("volume-range");
+var expand = document.getElementById("expand");
+var fullscreeen = document.getElementById("c-video");
 
 var player;
 var ismouseover = false;
@@ -12,11 +13,13 @@ var ismouseover = false;
 function onYouTubePlayerAPIReady() {
     player = new YT.Player('video-player', {
         events: {
-            'onReady': onPlayerReady
+            'onReady': onPlayerReady,
+            'onStateChange': onPlayerStateChange
         }
     });
 }
 
+//Cостояние видео
 function onPlayerReady(event) {
 
     btn.onclick = function () {
@@ -33,16 +36,33 @@ function onPlayerReady(event) {
     bar.addEventListener('mouseleave', function () {
         hovertime.style.display = 'none';
     });
+    range.onmousemove = function () {
+
+        SetVolume();
+    }
+    expand.onclick = function () {
+        playFullscreen();
+    }
+}
+
+//Cостояние видео
+function onPlayerStateChange(event) {
+    if (event.data == YT.PlayerState.PLAYING) {
+        btn.name = "pause-circle-outline";
+    }
+    else {
+        btn.name = "play-circle-outline";
+    }
 }
 
 // Запуск и пауза
 function togglePlayPause() {
-    if (btn.className == 'play') {
-        btn.className = 'pause';
+    if (btn.name == "play-circle-outline") {
+        btn.name = "pause-circle-outline";
         player.playVideo();
     }
     else {
-        btn.className = 'play';
+        btn.name = "play-circle-outline";
         player.pauseVideo();
     }
 }
@@ -60,7 +80,6 @@ function updateTime() {
         greenbar.style.width = videotime * 100 + "%";
     }
     SetVideoTime();
-
 }
 
 // Перемотка видео
@@ -70,7 +89,7 @@ function SeekBar() {
     let needPercent = ((event.clientX - left) / 1000);
     player.seekTo(player.getDuration() * needPercent, true);
 
-    if (btn.className == 'play')
+    if (btn.name == 'play-circle-outline')
         player.pauseVideo();
 }
 
@@ -92,13 +111,29 @@ function FormatTime(num) {
 
 //Вывод времени при наведении на прогресс бар
 function HoverTime() {
-    let { left }  = event.target.getBoundingClientRect();
+    let { left } = event.target.getBoundingClientRect();
 
     let needPercent = ((event.clientX - left) / 1000);
     let duration = player.getDuration() * needPercent;
     hovertime.innerHTML = `${GetVideoTime(duration)}`;
 
     hovertime.style.left = `${event.clientX - (left + (hovertime.offsetWidth / 2))}px`;
+
+
+}
+
+//Изменение звука
+function SetVolume() {
+    player.setVolume(range.value);
+}
+
+//FullScreen
+function playFullscreen() {
+    if (document.fullscreenElement) {
+        document.exitFullscreen();
+    } else {
+        fullscreeen.requestFullscreen();
+    }
 }
 
 // Inject YouTube API script
