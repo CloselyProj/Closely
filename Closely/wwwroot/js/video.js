@@ -5,7 +5,7 @@ var time = document.getElementById("video-time");
 var hovertime = document.getElementById("hover-time");
 var range = document.getElementById("volume-range");
 var expand = document.getElementById("expand");
-var fullscreeen = document.getElementById("c-video");
+var fullscreen = document.getElementById("c-video");
 
 var player;
 var ismouseover = false;
@@ -132,7 +132,7 @@ function playFullscreen() {
     if (document.fullscreenElement) {
         document.exitFullscreen();
     } else {
-        fullscreeen.requestFullscreen();
+        fullscreen.requestFullscreen();
     }
 }
 
