@@ -19,9 +19,9 @@ namespace Closely.Pages
             if (movie_link.Contains("www.youtube.com/watch?v="))
             {
                 Message = movie_link.Replace("watch?v=", "embed/");
-                Message += "?controls=0&enablejsapi=1";
                 GetRandomChar();
                 SendLink();
+                Message += "?controls=0&enablejsapi=1";
             }
             else
             {
@@ -38,6 +38,7 @@ namespace Closely.Pages
                     sharedlink += link.Split("?link=").Last();
 
                 Message = GetLink().Result;
+                Message += "?controls=0&enablejsapi=1";
             }
         }
         private string GetRandomChar()

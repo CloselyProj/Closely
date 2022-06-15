@@ -9,8 +9,6 @@ var fullscreen = document.getElementById("c-video");
 var link = document.getElementById("sharedlink");
 const group = link.value.split('?link=');
 
-var videolink = document.getElementById("video-player").src;
-
 "use strict";
 
 var connection = new signalR.HubConnectionBuilder().withUrl("/user").build();
@@ -34,7 +32,6 @@ function onYouTubePlayerAPIReady() {
 
 //Cостояние видео
 function onPlayerReady(event) {
-
     btn.onclick = function () {
         togglePlayPause();
         Synchronize();
@@ -159,6 +156,7 @@ function Synchronize() {
 }
 
 connection.on("SynchronizeVideo", function (message, group) {
+    alert(message);
     if (message == "play-circle-outline") {
         btn.name = "pause-circle-outline";
         player.playVideo();

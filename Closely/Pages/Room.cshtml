@@ -5,6 +5,7 @@
 }
 <link rel="stylesheet" href="~/css/room.css" />
 <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css">
+<script async src="https://www.youtube.com/iframe_api"></script>
 
 @if (@Model.Message != "Incorrect link!")
 {
@@ -46,7 +47,7 @@
     <input class="TextBoxRead" id="sharedlink" type="text" readonly value=@Model.sharedlink>
 
     <script src="~/js/signalr/dist/browser/signalr.js"></script>
-    <script src="~/js/video.js?version={version}"></script>
+    <script src="~/js/video.js"></script>
     //<script src="~/js/chat.js"></script>
     <script src="~/js/userchar.js?version={version}"></script>
 
