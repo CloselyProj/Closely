@@ -6,6 +6,19 @@ var hovertime = document.getElementById("hover-time");
 var range = document.getElementById("volume-range");
 var expand = document.getElementById("expand");
 var fullscreen = document.getElementById("c-video");
+var link = document.getElementById("sharedlink");
+const group = link.value.split('?link=');
+
+var videolink = document.getElementById("video-player").src;
+
+"use strict";
+
+var connection = new signalR.HubConnectionBuilder().withUrl("/user").build();
+
+connection.start().then(function () {
+}).catch(function (err) {
+    return console.error(err.toString());
+});
 
 var player;
 var ismouseover = false;
@@ -24,6 +37,7 @@ function onPlayerReady(event) {
 
     btn.onclick = function () {
         togglePlayPause();
+        Synchronize();
     };
     bar.onclick = function () {
         SeekBar();
@@ -135,6 +149,25 @@ function playFullscreen() {
         fullscreen.requestFullscreen();
     }
 }
+
+function Synchronize() {
+    var message = btn.name;
+    connection.invoke("Synchronize", message, group[1]).catch(function (err) {
+        return console.error(err.toString());
+    });
+    event.preventDefault();
+}
+
+connection.on("SynchronizeVideo", function (message, group) {
+    if (message == "play-circle-outline") {
+        btn.name = "pause-circle-outline";
+        player.playVideo();
+    }
+    else {
+        btn.name = "play-circle-outline";
+        player.pauseVideo();
+    }
+});
 
 // Inject YouTube API script
 var tag = document.createElement('script');

@@ -1,8 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.SignalR;
 using System;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Threading.Tasks;
 
 namespace Closely.Pages
 {
@@ -19,6 +21,7 @@ namespace Closely.Pages
                 Message = movie_link.Replace("watch?v=", "embed/");
                 Message += "?controls=0&enablejsapi=1";
                 GetRandomChar();
+                SendLink();
             }
             else
             {
@@ -33,6 +36,8 @@ namespace Closely.Pages
                     GetRandomChar();
                 else
                     sharedlink += link.Split("?link=").Last();
+
+                Message = GetLink().Result;
             }
         }
         private string GetRandomChar()
@@ -44,6 +49,34 @@ namespace Closely.Pages
                 sharedlink += symbols[index];
             }
             return sharedlink;
+        }
+        async private void SendLink()
+        {
+            WebRequest request = WebRequest.Create($"http://closely-001-site1.etempurl.com/Group/SetLink?videolink={Message}");
+            WebResponse response = await request.GetResponseAsync();
+            using (Stream stream = response.GetResponseStream())
+            {
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    Console.WriteLine(reader.ReadToEnd());
+                }
+            }
+            response.Close();
+        }
+        async private Task<string> GetLink()
+        {
+            var link = string.Empty;
+            WebRequest request = WebRequest.Create($"http://closely-001-site1.etempurl.com/Group/GetLink");
+            WebResponse response = await request.GetResponseAsync();
+            using (Stream stream = response.GetResponseStream())
+            {
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    link = reader.ReadToEnd();
+                }
+            }
+            response.Close();
+            return link;
         }
     }
 }

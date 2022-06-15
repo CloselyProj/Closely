@@ -22,7 +22,7 @@
         <div class="player-wrapper">
                 <div class="aspect-spacer"></div>
                 <div id="c-video" class="pos-absolute full-width full-height top-0 c-video">
-                    <iframe id="video-player" class="el-player" src=@Model.Message playsinline allowfullscreen allow="autoplay"></iframe>
+                    <iframe id="video-player" class="el-player" playsinline allowfullscreen allow="autoplay" src=@Model.Message></iframe>
 
                     <div class="controls">
                         <div id="color-bar">
@@ -46,9 +46,9 @@
     <input class="TextBoxRead" id="sharedlink" type="text" readonly value=@Model.sharedlink>
 
     <script src="~/js/signalr/dist/browser/signalr.js"></script>
-    <script src="~/js/video.js"></script>
+    <script src="~/js/video.js?version={version}"></script>
     //<script src="~/js/chat.js"></script>
-    <script src="~/js/userchar.js"></script>
+    <script src="~/js/userchar.js?version={version}"></script>
 
 
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>

@@ -21,5 +21,13 @@ namespace Closely.Hubs
         {
             await Clients.Group(group).SendAsync("Receive", message, group);
         }
+        public async Task Synchronize(string message, string group)
+        {
+            await Clients.Group(group).SendAsync("SynchronizeVideo", message, group);
+        }
+        public async Task SendVideo(string message, string group)
+        {
+            await Clients.Group(group).SendAsync("Video", message, group);
+        }
     }
 }
