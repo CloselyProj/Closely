@@ -19,16 +19,16 @@ namespace Server.Controllers
         }
 
         [HttpGet("SetLink")]
-        public string LinkSet(string videolink)
+        public string LinkSet(string group, string videolink)
         {
-            Group.Link = videolink;
-            return Group.Link;
+            Group.groups.Add(group, videolink);
+            return videolink;
         }
 
         [HttpGet("GetLink")]
-        public string LinkGet()
+        public string LinkGet(string group)
         {
-            return Group.Link;
+            return Group.groups.Where(x => x.Key == group).First().Value;
         }
     }
 }

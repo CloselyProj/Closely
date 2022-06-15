@@ -52,7 +52,8 @@ namespace Closely.Pages
         }
         async private void SendLink()
         {
-            WebRequest request = WebRequest.Create($"http://closely-001-site1.etempurl.com/Group/SetLink?videolink={Message}");
+            var group = sharedlink.Split("?link=").Last();
+            WebRequest request = WebRequest.Create($"http://closely-001-site1.etempurl.com/Group/SetLink?group={group}&videolink={Message}");
             WebResponse response = await request.GetResponseAsync();
             using (Stream stream = response.GetResponseStream())
             {
@@ -65,8 +66,9 @@ namespace Closely.Pages
         }
         async private Task<string> GetLink()
         {
+            var group = sharedlink.Split("?link=").Last();
             var link = string.Empty;
-            WebRequest request = WebRequest.Create($"http://closely-001-site1.etempurl.com/Group/GetLink");
+            WebRequest request = WebRequest.Create($"http://closely-001-site1.etempurl.com/Group/GetLink?group={group}");
             WebResponse response = await request.GetResponseAsync();
             using (Stream stream = response.GetResponseStream())
             {
