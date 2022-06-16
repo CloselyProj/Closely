@@ -8,12 +8,17 @@ var expand = document.getElementById("expand");
 var fullscreen = document.getElementById("c-video");
 var link = document.getElementById("sharedlink");
 const group = link.value.split('?link=');
-
+var popup = document.getElementById("popup");
+var popupbtn = document.getElementById("enter-btn");
 "use strict";
 
 var connection = new signalR.HubConnectionBuilder().withUrl("/user").build();
 
 connection.start().then(function () {
+    popup.style = "visibility: visible";
+    connection.invoke("Enter", group[1]).catch(function (err) {
+        return console.error(err.toString());
+    });
 }).catch(function (err) {
     return console.error(err.toString());
 });
@@ -32,8 +37,10 @@ function onYouTubePlayerAPIReady() {
 
 //Cостояние видео
 function onPlayerReady(event) {
+    popupbtn.onclick = function () {
+        popup.style = "visibility: hidden";
+    }
     btn.onclick = function () {
-        togglePlayPause();
         Synchronize();
     };
     bar.onclick = function () {
@@ -55,7 +62,6 @@ function onPlayerReady(event) {
         playFullscreen();
     }
 }
-
 //Cостояние видео
 function onPlayerStateChange(event) {
     if (event.data == YT.PlayerState.PLAYING) {
@@ -69,12 +75,10 @@ function onPlayerStateChange(event) {
 // Запуск и пауза
 function togglePlayPause() {
     if (btn.name == "play-circle-outline") {
-        btn.name = "pause-circle-outline";
-        player.playVideo();
+        player.pauseVideo();
     }
     else {
-        btn.name = "play-circle-outline";
-        player.pauseVideo();
+        player.playVideo();
     }
 }
 
@@ -149,24 +153,24 @@ function playFullscreen() {
 
 function Synchronize() {
     var message = btn.name;
-    connection.invoke("Synchronize", message, group[1]).catch(function (err) {
+    connection.invoke("Synchronize", message, group[1], player.getCurrentTime().toString()).catch(function (err) {
         return console.error(err.toString());
     });
     event.preventDefault();
 }
 
-connection.on("SynchronizeVideo", function (message, group) {
-    alert(message);
+connection.on("SynchronizeVideo", function (message, group, time) {
+    
     if (message == "play-circle-outline") {
         btn.name = "pause-circle-outline";
-        player.playVideo();
+        player.seekTo(time, true);
     }
     else {
         btn.name = "play-circle-outline";
-        player.pauseVideo();
+        player.seekTo(time, true);
     }
+    togglePlayPause();
 });
-
 // Inject YouTube API script
 var tag = document.createElement('script');
 tag.src = "https://www.youtube.com/player_api";

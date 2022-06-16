@@ -28,10 +28,14 @@ html {
 *, *::before, *::after {
     box-sizing: inherit;
 }
-
-.search_form {
+.search {
+    position: relative;
     margin-top: 10%;
-    margin-left: 37.5%;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+.search_form {
     position: relative;
     width: 50rem;
     background: var(--color-brand);

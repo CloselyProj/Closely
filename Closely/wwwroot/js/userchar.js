@@ -10,7 +10,6 @@ const group = link.value.split('?link=');
 //Disable the send button until connection is established.
 
 connection.start().then(function () {
-    
     document.getElementById("sendButton").disabled = false;
 }).catch(function (err) {
     return console.error(err.toString());

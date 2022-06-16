@@ -9,13 +9,13 @@
 
 @if (@Model.Message != "Incorrect link!")
 {
-    <div class="RoomChat">
+    @*<div class="RoomChat">
         <div class="UsersInRoom">
         </div>
         <input class="TextBoxRead" id="textForm" type="text" readonly>
         <input class="TextBoxEnter" id="messageInput" type="text">
         <input type="button" id="sendButton" value="Send Message" />
-    </div>
+    </div>*@
 
     <div id="app">
         <div class="inner">
@@ -33,18 +33,27 @@
                             <ion-icon id="pause-play" name="play-circle-outline"></ion-icon>
                             <ion-icon id="volume" name="volume-medium-outline"></ion-icon>
                             <input type="range" id="volume-range">
-                            
+
                             <div id="video-time"></div>
 
                             <ion-icon id="expand" name="expand-outline"></ion-icon>
                         </div>
-                            <div id="hover-time"></div>
+                        <div id="hover-time"></div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <input class="TextBoxRead" id="sharedlink" type="text" readonly value=@Model.sharedlink>
+    
+    <div class="link">
+        <input id="sharedlink" type="text" readonly value=@Model.sharedlink>
+    </div>
+    <div id="popup">
+        <div id="popup-content">
+            <p>Click to Enter</p>
+            <button id="enter-btn"><span>Enter</span></button>
+        </div>
+    </div>
 
     <script src="~/js/signalr/dist/browser/signalr.js"></script>
     <script src="~/js/video.js"></script>
