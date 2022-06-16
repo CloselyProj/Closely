@@ -10,6 +10,7 @@ var link = document.getElementById("sharedlink");
 const group = link.value.split('?link=');
 var popup = document.getElementById("popup");
 var popupbtn = document.getElementById("enter-btn");
+var seektotime;
 "use strict";
 
 var connection = new signalR.HubConnectionBuilder().withUrl("/user").build();
@@ -41,10 +42,12 @@ function onPlayerReady(event) {
         popup.style = "visibility: hidden";
     }
     btn.onclick = function () {
+        seektotime = player.getCurrentTime().toString();
         Synchronize();
     };
     bar.onclick = function () {
         SeekBar();
+        SynchronizeTime();
     }
     timeupdater = setInterval(updateTime, 100);
     bar.addEventListener('mousemove', function () {
@@ -102,7 +105,8 @@ function SeekBar() {
     let { left } = event.target.getBoundingClientRect();
 
     let needPercent = ((event.clientX - left) / 1000);
-    player.seekTo(player.getDuration() * needPercent, true);
+    seektotime = player.getDuration() * needPercent;
+    player.seekTo(seektotime, true);
 
     if (btn.name == 'play-circle-outline')
         player.pauseVideo();
@@ -153,24 +157,35 @@ function playFullscreen() {
 
 function Synchronize() {
     var message = btn.name;
-    connection.invoke("Synchronize", message, group[1], player.getCurrentTime().toString()).catch(function (err) {
-        return console.error(err.toString());
+    connection.invoke("Synchronize", message, group[1], seektotime.toString()).catch(function (err) {
+        //return console.error(err.toString());
+        alert(err.toString());
     });
     event.preventDefault();
 }
 
 connection.on("SynchronizeVideo", function (message, group, time) {
-    
     if (message == "play-circle-outline") {
         btn.name = "pause-circle-outline";
-        player.seekTo(time, true);
     }
     else {
         btn.name = "play-circle-outline";
-        player.seekTo(time, true);
     }
+    player.seekTo(time, true);
     togglePlayPause();
 });
+
+function SynchronizeTime() {
+    connection.invoke("SynchronizeTime", group[1], seektotime.toString()).catch(function (err) {
+        return console.error(err.toString());
+    });
+    event.preventDefault();
+}
+connection.on("SynchronizeTime", function (group, time) {
+    player.seekTo(time, true);
+    togglePlayPause();
+});
+
 // Inject YouTube API script
 var tag = document.createElement('script');
 tag.src = "https://www.youtube.com/player_api";

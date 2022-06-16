@@ -25,5 +25,9 @@ namespace Closely.Hubs
         {
             await Clients.Group(group).SendAsync("SynchronizeVideo", message, group, time);
         }
+        public async Task SynchronizeTime(string group, string time)
+        {
+            await Clients.Group(group).SendAsync("SynchronizeTime", group, time);
+        }
     }
 }
