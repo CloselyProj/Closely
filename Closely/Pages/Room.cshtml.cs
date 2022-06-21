@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -12,23 +13,28 @@ namespace Closely.Pages
     {
         public string Message = string.Empty;
         public string sharedlink = "https://localhost:44354/Room?link=";
+        public List<string> names = new List<string>();
         private string symbols = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
         private Random r = new Random();
         public void OnPost(string movie_link)
         {
-            if (movie_link.Contains("www.youtube.com/watch?v="))
+            if (movie_link != null)
             {
-                Message = movie_link.Replace("watch?v=", "embed/");
-                GetRandomChar();
-                SendLink();
-                Message += "?controls=0&enablejsapi=1";
+                if (movie_link.Contains("www.youtube.com/watch?v="))
+                {
+                    Message = movie_link.Replace("watch?v=", "embed/");
+                    GetRandomChar();
+                    SendLink();
+                    Message += "?controls=0&enablejsapi=1";
+                }
+                else
+                {
+                    Message = "Incorrect link!";
+                }
             }
-            else
-            {
-                Message = "Incorrect link!";
-            }
+            
         }
-        public void OnGet(string link)
+        public void OnGet(string link, string login)
         {
             if (link != null)
             {
@@ -39,6 +45,8 @@ namespace Closely.Pages
 
                 Message = GetLink().Result;
                 Message += "?controls=0&enablejsapi=1";
+
+                GetUsersNameGroup();
             }
         }
         private string GetRandomChar()
@@ -54,6 +62,7 @@ namespace Closely.Pages
         async private void SendLink()
         {
             var group = sharedlink.Split("?link=").Last();
+            Response.Cookies.Append("Group", group);
             WebRequest request = WebRequest.Create($"http://closely-001-site1.etempurl.com/Group/SetLink?group={group}&videolink={Message}");
             WebResponse response = await request.GetResponseAsync();
             using (Stream stream = response.GetResponseStream())
@@ -80,6 +89,40 @@ namespace Closely.Pages
             }
             response.Close();
             return link;
+        }
+
+        //Send tmp login
+        async private void SendLogin()
+        {
+            string group = Request.Cookies["Group"];
+            string login = Request.Cookies["TmpLogin"];
+            WebRequest request = WebRequest.Create($"http://closely-001-site1.etempurl.com/Group/SetUserGroupName?group={group}&name={login}");
+            WebResponse response = await request.GetResponseAsync();
+            using (Stream stream = response.GetResponseStream())
+            {
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    Console.WriteLine(reader.ReadToEnd());
+                }
+            }
+            response.Close();
+        }
+        async private void GetUsersNameGroup()
+        {
+            string group = Request.Cookies["Group"];
+            WebRequest request = WebRequest.Create($"http://closely-001-site1.etempurl.com/Group/GetUserGroupName?group={group}");
+            WebResponse response = await request.GetResponseAsync();
+            using (Stream stream = response.GetResponseStream())
+            {
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    foreach (var item in reader.ReadToEnd())
+                    {
+                        names.Add(item.ToString());
+                    }
+                }
+            }
+            response.Close();
         }
     }
 }

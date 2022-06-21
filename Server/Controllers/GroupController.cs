@@ -30,5 +30,34 @@ namespace Server.Controllers
         {
             return Group.groups.Where(x => x.Key == group).First().Value;
         }
+        [HttpGet("SetUserGroupName")]
+        public void SetUserGroupName(string group, string name)
+        {
+            string names = string.Empty;
+            if (Group.UserGroupName.ContainsKey(group))
+            {
+                if(names == string.Empty)
+                {
+                    names = Group.UserGroupName[group];
+                }
+                else
+                {
+                    names += $"\n{Group.UserGroupName[group]}";
+                }
+                Group.UserGroupName.Add(group, names);
+            }
+            else { Group.UserGroupName.Add(group, name); }
+        }
+
+        [HttpGet("GetUserGroupName")]
+        public List<string> GetUserGroupNames(string group)
+        {
+            List<string> names = new List<string>();
+            foreach (var item in Group.UserGroupName.Where(x=>x.Key==group).ToString().Split("\n"))
+            {
+                names.Add(item);
+            }
+            return names;
+        }
     }
 }

@@ -10,6 +10,7 @@ var link = document.getElementById("sharedlink");
 const group = link.value.split('?link=');
 var popup = document.getElementById("popup");
 var popupbtn = document.getElementById("enter-btn");
+var tmp_login = document.getElementById("inputlogin");
 var seektotime;
 "use strict";
 
@@ -44,7 +45,12 @@ function onPlayerReady(event) {
     btn.onclick = function () {
         seektotime = player.getCurrentTime().toString();
         Synchronize();
-    };
+    }
+    popupbtn.onclick = function () {
+        document.cookie = "TmpLogin" + '=' + encodeURIComponent(tmp_login.value);
+        popup.remove();
+        alert("Deleted");
+    }
     bar.onclick = function () {
         SeekBar();
         SynchronizeTime();
@@ -185,6 +191,10 @@ connection.on("SynchronizeTime", function (group, time) {
     player.seekTo(time, true);
     togglePlayPause();
 });
+
+
+
+
 
 // Inject YouTube API script
 var tag = document.createElement('script');
