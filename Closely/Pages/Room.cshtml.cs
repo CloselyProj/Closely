@@ -32,9 +32,11 @@ namespace Closely.Pages
                     Message = "Incorrect link!";
                 }
             }
-            
+            SendLogin();
+
+
         }
-        public void OnGet(string link, string login)
+        public void OnGet(string link)
         {
             if (link != null)
             {
@@ -45,7 +47,7 @@ namespace Closely.Pages
 
                 Message = GetLink().Result;
                 Message += "?controls=0&enablejsapi=1";
-
+                Response.Cookies.Append("Group", link.Split("?link=").Last().ToString());
                 GetUsersNameGroup();
             }
         }
@@ -76,7 +78,7 @@ namespace Closely.Pages
         }
         async private Task<string> GetLink()
         {
-            var group = sharedlink.Split("?link=").Last();
+            string group = Request.Cookies["Group"];
             var link = string.Empty;
             WebRequest request = WebRequest.Create($"http://closely-001-site1.etempurl.com/Group/GetLink?group={group}");
             WebResponse response = await request.GetResponseAsync();

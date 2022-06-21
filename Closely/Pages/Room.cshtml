@@ -43,6 +43,12 @@
                 </div>
             </div>
         </div>
+        <div>
+            @if (@Model.names.Count > 1)
+            {
+                 @Html.DisplayFor(x=>x.names);
+            }
+        </div>
     </div>
     
     <div class="link">
