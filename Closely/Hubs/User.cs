@@ -19,7 +19,7 @@ namespace Closely.Hubs
         }
         public async Task Send(string message, string group)
         {
-            await Clients.Group(group).SendAsync("Receive", message, group);
+            await Clients.Group(group).SendAsync("Send", message, group);
         }
         public async Task Synchronize(string message, string group, string time)
         {

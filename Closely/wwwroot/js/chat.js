@@ -5,7 +5,7 @@ var connection = new signalR.HubConnectionBuilder().withUrl("/user").build();
 //Disable the send button until connection is established.
 document.getElementById("sendButton").disabled = true;
 
-connection.on("SendSimpleMessage", function (message) {
+connection.on("Send", function (message) {
     document.getElementById('textForm').value = document.getElementById('textForm').value + `${message}`;
 });
 
@@ -17,7 +17,7 @@ connection.start().then(function () {
 
 document.getElementById("sendButton").addEventListener("click", function (event) {
     var message = document.getElementById("messageInput").value;
-    connection.invoke("SendMessage", message).catch(function (err) {
+    connection.invoke("Send", message).catch(function (err) {
         return console.error(err.toString());
     });
     event.preventDefault();

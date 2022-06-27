@@ -43,12 +43,11 @@
                 </div>
             </div>
         </div>
-        <div>
-            @if (@Model.names.Count > 1)
-            {
-                 @Html.DisplayFor(x=>x.names);
-            }
-        </div>
+           <div class="TextChat">
+               <input id ="textForm" style=width:100px; height:600px;>
+               <input id = "messageInput" style="width:50px; height:100px;">
+               <button id="sendButton">Enter</button>
+           </div>
     </div>
     
     <div class="link">
@@ -56,14 +55,14 @@
     </div>
     <div id="popup">
         <div id="popup-content">
-            <input id="inputlogin" type="text" placeholder="Enter name">
-            <button id="enter-btn">OK</button>
+             <input id="inputlogin" name = "name" type="text" placeholder="Enter name">
+             <submit id="enter-btn">OK</submit>
         </div>
     </div>
 
     <script src="~/js/signalr/dist/browser/signalr.js"></script>
     <script src="~/js/video.js"></script>
-    //<script src="~/js/chat.js"></script>
+    <script src="~/js/chat.js"></script>
     <script src="~/js/userchar.js?version={version}"></script>
 
 

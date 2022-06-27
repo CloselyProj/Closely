@@ -13,6 +13,17 @@ var popupbtn = document.getElementById("enter-btn");
 var tmp_login = document.getElementById("inputlogin");
 var seektotime;
 "use strict";
+popupbtn.hidden = true;
+tmp_login.addEventListener('input', CheckTmpLogin)
+
+function CheckTmpLogin(event) {
+    if (tmp_login.value.length>=5) {
+        popupbtn.hidden = false;
+    }
+    else {
+        popupbtn.hidden = true;
+    }
+}
 
 var connection = new signalR.HubConnectionBuilder().withUrl("/user").build();
 
@@ -48,8 +59,9 @@ function onPlayerReady(event) {
     }
     popupbtn.onclick = function () {
         document.cookie = "TmpLogin" + '=' + encodeURIComponent(tmp_login.value);
+        document.cookie = "SendLogin" + '=' + "True";
         popup.remove();
-        alert("Deleted");
+        const data = { username: tmp.login.value };
     }
     bar.onclick = function () {
         SeekBar();

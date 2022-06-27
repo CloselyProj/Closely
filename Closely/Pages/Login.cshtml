@@ -22,14 +22,13 @@
 											<div class="form-group">
 												<i class="input-icon uil uil-at"></i>
 											</div>	
-											<div class="form-group mt-2">
-												<input type="password" name="logpass" class="form-style" placeholder="Pass" id="logpass" autocomplete="off">
-												<i class="input-icon uil uil-lock-alt"></i>
-											</div>
-											<form action="logining" method="post">
-												<input type="text" name="loglogin" class="form-style" placeholder="Login" id="logemail" autocomplete="off" minlength="8">
-                                                <button type="submit" class="btnlog mt-4">Submit</button>
-                                            </form>
+											<form method="post">
+												<div class="form-group mt-2">
+													<input type="text" name="loglogin" minlength="4" maxlength="8" class="form-style" placeholder="Login" id="loglogin" autocomplete="off" minlength="8">
+													<input type="password" minlength="6" maxlength="16" name="logpass" class="form-style" placeholder="Pass" id="logpass" autocomplete="off">
+													<button style="visibility:hidden" type="submit" class="btnlog mt-4" id = "logBtn">Login</button>
+												</div>
+											</form>
                             				<p class="mb-0 mt-4 text-center"><a href="#0" class="link">Forgot your password?</a></p>
 				      					</div>
 			      					</div>
@@ -38,26 +37,24 @@
 									<div class="center-wrap">
 										<div class="section text-center">
 											<h4 class="mb-4 pb-3">Sign Up</h4>
-                                            <form action="registering" method="post">
+                                            <form method="post">
                                                 <div class="form-group">
-                                                    <input type="text" name="reglogin" class="form-style" placeholder="Login" id="reglogin" autocomplete="off">
+                                                    <input type="text" name="reglogin" minlength="4" maxlength="8" class="form-style" placeholder="Login" id="reglogin" autocomplete="off">
                                                     <i class="input-icon uil uil-user"></i>
                                                 </div>	
                                                 <div class="form-group mt-2">
-                                                    <input type="password" name="regpass" class="form-style" placeholder="Password" id="regpass" autocomplete="off">
+                                                    <input type="password" name="regpass" minlength="6" maxlength="16" class="form-style" placeholder="Password" id="regpass" autocomplete="off">
                                                     <i class="input-icon uil uil-at"></i>
                                                 </div>	
                                                 <div class="form-group mt-2">
-                                                    <input type="password" name="regconfpass" class="form-style" placeholder="Confirm Password" id="regconfpass" autocomplete="off">
+                                                    <input type="password" name="regconfpass" minlength="6" maxlength="16" class="form-style" placeholder="Confirm Password" id="regconfpass" autocomplete="off">
                                                     <i class="input-icon uil uil-at"></i>
                                                 </div>	
                                                 <div class="form-group mt-2">
-                                                    <input type="email" name="regemail" class="form-style" placeholder="Email" id="regemail" autocomplete="off">
+                                                    <input type="email" name="regemail" minlength="6" maxlength="25" class="form-style" placeholder="Email" id="regemail" autocomplete="off">
                                                     <i class="input-icon uil uil-lock-alt"></i>
                                                 </div>
-											
-                                                <button id="regBtn" type="submit" class="btnlog mt-4">Submit</button>
-
+                                                <button style="visibility:hidden" id="regBtn" type="submit" class="btnlog mt-4">Submit</button>
                                             </form>
 				      					</div>
 			      					</div>
@@ -69,4 +66,4 @@
 	      	</div>
 	    </div>
 	</div>
-<script src="~/js/login.js" asp-append-version="true"></script>
+<script src="~/js/login.js"></script>

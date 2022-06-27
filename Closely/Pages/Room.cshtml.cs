@@ -16,7 +16,7 @@ namespace Closely.Pages
         public List<string> names = new List<string>();
         private string symbols = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
         private Random r = new Random();
-        public void OnPost(string movie_link)
+        public void OnPost(string movie_link, string name)
         {
             if (movie_link != null)
             {
@@ -32,9 +32,11 @@ namespace Closely.Pages
                     Message = "Incorrect link!";
                 }
             }
-            SendLogin();
-
-
+            else if (name != null)
+            {
+                Response.Cookies.Append("TmpLogin", name);
+                SendLogin();
+            }
         }
         public void OnGet(string link)
         {
@@ -48,7 +50,7 @@ namespace Closely.Pages
                 Message = GetLink().Result;
                 Message += "?controls=0&enablejsapi=1";
                 Response.Cookies.Append("Group", link.Split("?link=").Last().ToString());
-                GetUsersNameGroup();
+               // GetUsersNameGroup();
             }
         }
         private string GetRandomChar()
@@ -64,6 +66,7 @@ namespace Closely.Pages
         async private void SendLink()
         {
             var group = sharedlink.Split("?link=").Last();
+            
             Response.Cookies.Append("Group", group);
             WebRequest request = WebRequest.Create($"http://closely-001-site1.etempurl.com/Group/SetLink?group={group}&videolink={Message}");
             WebResponse response = await request.GetResponseAsync();
@@ -94,12 +97,13 @@ namespace Closely.Pages
         }
 
         //Send tmp login
-        async private void SendLogin()
+        async public void SendLogin()
         {
+           
             string group = Request.Cookies["Group"];
             string login = Request.Cookies["TmpLogin"];
             WebRequest request = WebRequest.Create($"http://closely-001-site1.etempurl.com/Group/SetUserGroupName?group={group}&name={login}");
-            WebResponse response = await request.GetResponseAsync();
+             WebResponse response = await request.GetResponseAsync();
             using (Stream stream = response.GetResponseStream())
             {
                 using (StreamReader reader = new StreamReader(stream))
@@ -109,7 +113,7 @@ namespace Closely.Pages
             }
             response.Close();
         }
-        async private void GetUsersNameGroup()
+        async public void GetUsersNameGroup()
         {
             string group = Request.Cookies["Group"];
             WebRequest request = WebRequest.Create($"http://closely-001-site1.etempurl.com/Group/GetUserGroupName?group={group}");
