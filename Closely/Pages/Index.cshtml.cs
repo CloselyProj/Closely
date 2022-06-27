@@ -19,7 +19,6 @@ namespace Closely.Pages
         }
         public void OnGet()
         {
-
         }
     }
 }
