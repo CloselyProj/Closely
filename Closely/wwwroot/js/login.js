@@ -42,7 +42,6 @@ function checkDateReg() {
         regemail.style.color = redColor;
     }
     if (reglogin.style.color == regbtn.style.color && regpass.style.color == regbtn.style.color && regemail.style.color == regbtn.style.color) {
-        alert(regbtn.style.color);
         regbtn.style.visibility = 'visible';
     }
     else {

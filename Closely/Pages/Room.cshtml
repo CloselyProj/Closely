@@ -16,7 +16,11 @@
         <input class="TextBoxEnter" id="messageInput" type="text">
         <input type="button" id="sendButton" value="Send Message" />
     </div>*@
-
+     <div class="avatar_divs">
+            <div class="avatar"></div>
+            <div class="avatar"></div>
+            <div class="avatar"></div>
+        </div>
     <div id="app">
         <div class="inner">
             <!-- Player wrapper, forcing 16:9 aspect ratio -->
@@ -24,7 +28,6 @@
                 <div class="aspect-spacer"></div>
                 <div id="c-video" class="pos-absolute full-width full-height top-0 c-video">
                     <iframe id="video-player" class="el-player" playsinline allowfullscreen allow="autoplay" src=@Model.Message></iframe>
-
                     <div class="controls">
                         <div id="color-bar">
                             <div id="green-bar"></div>
@@ -33,9 +36,7 @@
                             <ion-icon id="pause-play" name="play-circle-outline"></ion-icon>
                             <ion-icon id="volume" name="volume-medium-outline"></ion-icon>
                             <input type="range" id="volume-range">
-
                             <div id="video-time"></div>
-
                             <ion-icon id="expand" name="expand-outline"></ion-icon>
                         </div>
                         <div id="hover-time"></div>
@@ -43,11 +44,6 @@
                 </div>
             </div>
         </div>
-           <div class="TextChat">
-               <input id ="textForm" style=width:100px; height:600px;>
-               <input id = "messageInput" style="width:50px; height:100px;">
-               <button id="sendButton">Enter</button>
-           </div>
     </div>
     
     <div class="link">
@@ -56,9 +52,10 @@
     <div id="popup">
         <div id="popup-content">
              <input id="inputlogin" name = "name" type="text" placeholder="Enter name">
-             <submit id="enter-btn">OK</submit>
+             <button id="enter-btn">OK</button>
         </div>
     </div>
+    <button class="custom-btn btn-6" id = "copy_Link"><span>Friend's link</span></button>
 
     <script src="~/js/signalr/dist/browser/signalr.js"></script>
     <script src="~/js/video.js"></script>

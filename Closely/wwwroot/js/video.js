@@ -11,17 +11,22 @@ const group = link.value.split('?link=');
 var popup = document.getElementById("popup");
 var popupbtn = document.getElementById("enter-btn");
 var tmp_login = document.getElementById("inputlogin");
+const CopyLinkBtn = document.getElementById("copy_Link");
 var seektotime;
 "use strict";
-popupbtn.hidden = true;
+popupbtn.style.visibility = 'hidden';
 tmp_login.addEventListener('input', CheckTmpLogin)
 
+CopyLinkBtn.onclick = function () {
+    navigator.clipboard.writeText(link.value);
+    
+}
 function CheckTmpLogin(event) {
-    if (tmp_login.value.length>=5) {
-        popupbtn.hidden = false;
+    if (tmp_login.value.length >= 3) {
+        popupbtn.style.visibility = 'visible';
     }
     else {
-        popupbtn.hidden = true;
+        popupbtn.style.visibility = 'hidden';
     }
 }
 

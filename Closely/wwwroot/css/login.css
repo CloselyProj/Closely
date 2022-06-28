@@ -101,6 +101,9 @@ h6 span {
     transform-style: preserve-3d;
     perspective: 800px;
     margin-top: 60px;
+    display:block;
+    left:35%;
+    text-align:center;
 }
 
 .card-3d-wrapper {
@@ -304,3 +307,7 @@ h6 span {
         width: auto;
         display: block;
     }
+.spansLogReg{
+    display:table;
+    margin:0 auto;
+}
