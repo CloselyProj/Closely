@@ -30,16 +30,28 @@ function CheckTmpLogin(event) {
     }
 }
 
-var connection = new signalR.HubConnectionBuilder().withUrl("/user").build();
+const connection = new signalR.HubConnectionBuilder().withUrl("/user").build();
 
-connection.start().then(function () {
-    popup.style = "visibility: visible";
-    connection.invoke("Enter", group[1]).catch(function (err) {
-        return console.error(err.toString());
-    });
-}).catch(function (err) {
-    return console.error(err.toString());
+
+async function start() {
+    try {
+        await connection.start();
+        console.log("SignalR Connected!");
+        popup.style.visibility = "visible";
+        connection.invoke("Enter", group[1]).catch(function (err) {
+            return console.error(err.toString());
+        });
+    } catch (error) {
+        console.log(error);
+        setTimeout(start, 5000);
+    }
+};
+
+connection.onclose(async () => {
+    await start();
 });
+
+start();
 
 var player;
 var ismouseover = false;

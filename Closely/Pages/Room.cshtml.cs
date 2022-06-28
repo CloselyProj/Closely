@@ -12,7 +12,7 @@ namespace Closely.Pages
     public class RoomModel : PageModel
     {
         public string Message = string.Empty;
-        public string sharedlink = "https://localhost:44354/Room?link=";
+        public string sharedlink = "https://closely.pp.ua/Room?link=";
         public List<string> names = new List<string>();
         private string symbols = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
         private Random r = new Random();
