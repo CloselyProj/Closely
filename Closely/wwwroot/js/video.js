@@ -17,19 +17,6 @@ var seektotime;
 popupbtn.style.visibility = 'hidden';
 tmp_login.addEventListener('input', CheckTmpLogin)
 
-CopyLinkBtn.onclick = function () {
-    navigator.clipboard.writeText(link.value);
-    
-}
-function CheckTmpLogin(event) {
-    if (tmp_login.value.length >= 3) {
-        popupbtn.style.visibility = 'visible';
-    }
-    else {
-        popupbtn.style.visibility = 'hidden';
-    }
-}
-
 const connection = new signalR.HubConnectionBuilder().withUrl("/user").build();
 
 
@@ -63,6 +50,19 @@ function onYouTubePlayerAPIReady() {
             'onStateChange': onPlayerStateChange
         }
     });
+}
+
+CopyLinkBtn.onclick = function () {
+    navigator.clipboard.writeText(link.value);
+
+}
+function CheckTmpLogin(event) {
+    if (tmp_login.value.length >= 3) {
+        popupbtn.style.visibility = 'visible';
+    }
+    else {
+        popupbtn.style.visibility = 'hidden';
+    }
 }
 
 //Cостояние видео
